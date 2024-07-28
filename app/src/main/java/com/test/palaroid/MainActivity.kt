@@ -19,7 +19,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val list = WorldHeritageRepositoryImpl(this).getWorldHeritageSiteList()
+        val list = WorldHeritageRepositoryImpl().getWorldHeritageSiteList()
         Log.d("TTTTTT", "${list[0]}")
 
         enableEdgeToEdge()
