@@ -17,11 +17,40 @@ class WorldHeritageListViewModel(
     init {
         viewModelScope.launch {
             val list = repository.getWorldHeritageSiteList()
-            _state.value = WorldHeritageListState(list)
+            _state.value = WorldHeritageListState(
+                list = list,
+                filteredList = list,
+                showLoading = false
+            )
         }
     }
+
+    fun onSearchTextChanged(searchText: String) {
+        _state.value = _state.value.copy(
+            searchText = searchText,
+            showLoading = true
+        )
+        val filteredList = if (searchText.isEmpty()) {
+            _state.value.list
+        } else {
+            _state.value.list.filter { checkByFilter(worldHeritageSite = it, searchText) }
+        }
+        _state.value = _state.value.copy(
+            filteredList = filteredList,
+            showLoading = false
+        )
+    }
+
+    private fun checkByFilter(
+        worldHeritageSite: WorldHeritageSite,
+        searchText: String
+    ) = worldHeritageSite.name?.contains(searchText) == true ||
+            worldHeritageSite.shortInfo?.contains(searchText) == true
 }
 
 data class WorldHeritageListState(
-    val list: List<WorldHeritageSite> = emptyList()
+    val list: List<WorldHeritageSite> = emptyList(),
+    val filteredList: List<WorldHeritageSite> = emptyList(),
+    val searchText: String = "",
+    val showLoading: Boolean = true,
 )
