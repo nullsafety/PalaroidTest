@@ -5,14 +5,17 @@ import androidx.lifecycle.viewModelScope
 import com.test.palaroid.data.entity.WorldHeritageSite
 import com.test.palaroid.domain.WorldHeritageRepository
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class WorldHeritageListViewModel(
     repository: WorldHeritageRepository
 ) : ViewModel() {
     private val _state = MutableStateFlow(WorldHeritageListState())
-    val state: StateFlow<WorldHeritageListState> = _state
+    val state: StateFlow<WorldHeritageListState> =
+        _state.stateIn(viewModelScope, SharingStarted.Eagerly, WorldHeritageListState())
 
     init {
         viewModelScope.launch {
@@ -44,8 +47,8 @@ class WorldHeritageListViewModel(
     private fun checkByFilter(
         worldHeritageSite: WorldHeritageSite,
         searchText: String
-    ) = worldHeritageSite.name?.contains(searchText) == true ||
-            worldHeritageSite.shortInfo?.contains(searchText) == true
+    ) = worldHeritageSite.name?.contains(searchText, ignoreCase = true) == true ||
+            worldHeritageSite.shortInfo?.contains(searchText, ignoreCase = true) == true
 }
 
 data class WorldHeritageListState(
