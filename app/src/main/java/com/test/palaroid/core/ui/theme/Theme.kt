@@ -1,6 +1,5 @@
-package com.test.palaroid.ui.theme
+package com.test.palaroid.core.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

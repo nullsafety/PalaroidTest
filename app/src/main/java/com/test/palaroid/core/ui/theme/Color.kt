@@ -1,4 +1,4 @@
-package com.test.palaroid.ui.theme
+package com.test.palaroid.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
