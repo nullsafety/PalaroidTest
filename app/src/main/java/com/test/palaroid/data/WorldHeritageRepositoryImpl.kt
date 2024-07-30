@@ -10,4 +10,5 @@ class WorldHeritageRepositoryImpl : WorldHeritageRepository {
 
     override fun getWorldHeritageSiteList() =
         parseJsonFromRaw<List<WorldHeritageSite>>(getKoinInstance<Context>(), R.raw.world_heritage)
+            .map { it.copy(image = it.image?.replace("http", "https")) }
 }

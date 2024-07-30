@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">PalaroidTest</string>
+    <string name="image_description">image</string>
+    <string name="fieldname_region">region</string>
+    <string name="fieldname_year">year</string>
+    <string name="fieldname_shortinfo">shortInfo</string>
+    <string name="fieldname_name">name</string>
+    <string name="search_label">Type here to search</string>
 </resources>
